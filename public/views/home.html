@@ -1,0 +1,33 @@
+<div class="container-fluid top-margin">
+    <div class="text-center">
+        <h1> Movie Rater Application</h1>
+    </div>
+    <div class="jumbotron">
+        <button class="btn btn-primary btn-sm" ng-click="controller1.FilterRemove()">remove filter</button>
+            <div google-chart chart="controller1.myobj" style="{{chart.cssStyle}}" agc-on-select="controller1.selectHandler(selectedItem)"></div>
+
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-md-4 movie-class">
+            <div class="dropdown">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+    Sort By
+  </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" ng-click="controller1.SortByName()">Name</a>
+                    <a class="dropdown-item" ng-click="controller1.SortByDate()">Date</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-xs-6 col-md-4 movie-class" ng-repeat="movie in controller1.data">
+            <img src="{{movie.image}}" class="img-fluid">
+            <h3>{{movie.title}}</h3>
+            <p>{{movie.releaseDate}}</p>
+            <div ng-if="movie.rating ==0">Not Rated</div>
+            <div ng-if="movie.rating != 0">Rating {{movie.rating}}</div>
+            <div star-rating rating-value="controller1.ratings[movie.id-1][movie.id]" movie-id="movie.id" on-rating-selected="controller1.getSelectedRating(rating,id)" date ="movie.releaseDate" check="controller1.check"></div>
+        </div>
+    </div>
+</div>
